@@ -54,7 +54,7 @@ ROOT_URLCONF = 'asistencia.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['./asistencia/templates/'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
