@@ -1,9 +1,15 @@
 from django.http import HttpResponse
 import datetime
+from django.shortcuts import render
+from django.template import Template, Context
 
 def saludo(request):
-
-	html='<html><body><h1>Hola Feo</h1></body></html>'
+	context = {}
+	doc_externo=open('./asistencia/templates/index.html')
+	plt=Template(doc_externo.read())
+	doc_externo.close()
+	ctx=Context()
+	html=plt.render(ctx)
 
 	return HttpResponse(html)
 
