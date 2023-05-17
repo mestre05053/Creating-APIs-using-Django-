@@ -3,12 +3,30 @@ import datetime
 from django.shortcuts import render
 from django.template import Template, Context
 
+class Persona(object):
+
+	"""docstring for Persona"""
+
+	def __init__(self, nombre, apellido):
+		self.nombre=nombre
+		self.apellido = apellido
+
+
 def saludo(request):
+	p1=Persona('Alejandro','Mestre')
+	name='juyan'
+	last_name='majao'
+	fecha_actual = datetime.datetime.now()
 	context = {}
 	doc_externo=open('./asistencia/templates/index.html')
 	plt=Template(doc_externo.read())
 	doc_externo.close()
-	ctx=Context()
+	ctx=Context({'name_person':name,'last_name':last_name,'fecha_actual':fecha_actual})
+	
+	'''Uso la clase Persona para pasarle datos a la vista a traves de las propiedas del objeto
+	persona que cree en p1'''
+	#ctx=Context({'name_person':p1.nombre,'last_name':p1.apellido,'fecha_actual':fecha_actual})
+	
 	html=plt.render(ctx)
 
 	return HttpResponse(html)
