@@ -13,7 +13,8 @@ class Persona(object):
 
 
 def saludo(request):
-	p1=Persona('Alejandro','Mestre')
+	temas=['Templates','Modelos','Formularios','Vistas','Despliegue']
+	p1=Persona('alejandro','mestre')
 	name='juyan'
 	last_name='majao'
 	fecha_actual = datetime.datetime.now()
@@ -21,11 +22,11 @@ def saludo(request):
 	doc_externo=open('./asistencia/templates/index.html')
 	plt=Template(doc_externo.read())
 	doc_externo.close()
-	ctx=Context({'name_person':name,'last_name':last_name,'fecha_actual':fecha_actual})
+	#ctx=Context({'name_person':name,'last_name':last_name,'fecha_actual':fecha_actual})
 	
 	'''Uso la clase Persona para pasarle datos a la vista a traves de las propiedas del objeto
 	persona que cree en p1'''
-	#ctx=Context({'name_person':p1.nombre,'last_name':p1.apellido,'fecha_actual':fecha_actual})
+	ctx=Context({'name_person':p1.nombre,'last_name':p1.apellido,'fecha_actual':fecha_actual,'temas':temas})
 	
 	html=plt.render(ctx)
 

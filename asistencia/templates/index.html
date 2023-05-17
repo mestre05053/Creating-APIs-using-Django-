@@ -1,0 +1,23 @@
+<html>
+	<body>
+		<h1>Hola Feo desde la plantillas</h1>
+		<p>El nombre del merengue es : {{name_person.capitalize}}</p>
+		<p>El apellido del merengue es : {{last_name.capitalize}}</p>
+		<p>El apellido del merengue es : {{fecha_actual.day}}/{{fecha_actual.month}}/{{fecha_actual.year}}</p>
+		<p>Temas del curso
+
+			{%if temas %}
+				
+				{%for i in temas%}
+					<li>{{i}}</li>
+
+				{%endfor%}
+
+				{%else%}
+
+				<p>No hay temas</p>
+			{%endif%}
+
+		</p>
+	</body>
+</html>
