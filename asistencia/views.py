@@ -20,11 +20,6 @@ def saludo(request):
 	last_name='majao'
 	fecha_actual = datetime.datetime.now()
 	context = {}
-	#doc_externo=open('./asistencia/templates/index.html')
-	#plt=Template(doc_externo.read())
-	#doc_externo.close()
-
-	doc_externo=loader.get_template('index.html')
 	
 	#ctx=Context({'name_person':name,'last_name':last_name,'fecha_actual':fecha_actual})
 	
@@ -32,9 +27,9 @@ def saludo(request):
 	persona que cree en p1'''
 	#ctx=Context({'name_person':p1.nombre,'last_name':p1.apellido,'fecha_actual':fecha_actual,'temas':temas})
 	
-	html=doc_externo.render({'name_person':p1.nombre,'last_name':p1.apellido,'fecha_actual':fecha_actual,'temas':temas})
+	context={'name_person':p1.nombre,'last_name':p1.apellido,'fecha_actual':fecha_actual,'temas':temas}
 
-	return HttpResponse(html)
+	return render(request,'index.html',context)
 
 
 def despedida(request):

@@ -1,5 +1,8 @@
-<html>
-	<body>
+{% extends 'base.html' %}
+
+
+
+{% block content %}
 		{%if name_person == 'alejandro'%}
 
 			<h1>Hola Feo desde la plantillas</h1>
@@ -22,6 +25,5 @@
 
 					<p>No hay temas</p>
 				{%endif%}
-		</p>
-	</body>
-</html>
+
+{% endblock %}

@@ -20,7 +20,7 @@ from asistencia.views import saludo, despedida, hora, calcula_edad
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', saludo),
+    path('', saludo, name='saludo'),
     path('despedida/', despedida),
     path('hora/', hora),
     path('calcula_edad/<int:anno>/<int:edad_actual>', calcula_edad),
