@@ -16,12 +16,8 @@ class Persona(object):
 def saludo(request):
 	temas=['Templates','Modelos','Formularios','Vistas','Despliegue']
 	p1=Persona('alejandro','mestre')
-	name='juyan'
-	last_name='majao'
 	fecha_actual = datetime.datetime.now()
 	context = {}
-	
-	#ctx=Context({'name_person':name,'last_name':last_name,'fecha_actual':fecha_actual})
 	
 	'''Uso la clase Persona para pasarle datos a la vista a traves de las propiedas del objeto
 	persona que cree en p1'''
@@ -31,6 +27,10 @@ def saludo(request):
 
 	return render(request,'index.html',context)
 
+def json(request):
+	context={}
+
+	return render(request, 'json.html', context)
 
 def despedida(request):
 

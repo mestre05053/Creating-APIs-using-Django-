@@ -16,11 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from asistencia.views import saludo, despedida, hora, calcula_edad
+from asistencia.views import saludo, despedida, hora, calcula_edad, json
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', saludo, name='saludo'),
+    path('json/', json, name='json'),
     path('despedida/', despedida),
     path('hora/', hora),
     path('calcula_edad/<int:anno>/<int:edad_actual>', calcula_edad),
