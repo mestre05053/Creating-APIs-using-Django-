@@ -1,29 +1,26 @@
 {% extends 'base.html' %}
 
-
-
 {% block content %}
-		{%if name_person == 'alejandro'%}
 
-			<h1>Hola Feo desde la plantillas</h1>
-			<p>El nombre del merengue es : {{name_person.capitalize}}</p>
-			<p>El apellido del merengue es : {{last_name.capitalize}}</p>
-			<p>El apellido del merengue es : {{fecha_actual.day}}/{{fecha_actual.month}}/{{fecha_actual.year}}</p>
-			{%else%}
-			<p>El profesor Alejandro no se encuentra</p>
-		{%endif%}
-			<p>Temas del curso
-
-				{%if temas %}
-					
-					{%for i in temas%}
-						<li>{{i}}</li>
-
-					{%endfor%}
-
-					{%else%}
-
-					<p>No hay temas</p>
-				{%endif%}
+	<div class="col-md-6 offset-md-3">
+		{%  if user.is_authenticated  %}
+			<h1>Welcome</h1>
+		{% else %}
+			<h1>Login</h1>
+			<form method="POST" action="{% url 'saludo' %}">
+				{% csrf_token %}
+				<form>
+				  <div class="mb-3">
+				    <input type="text" class="form-control" name="username" placeholder="Username" required>
+				  </div>
+				  <div class="mb-3">
+				    <input type="password" class="form-control" name="password" placeholder="Password" required>
+				  </div>
+				  <button type="submit" class="btn btn-secondary">Login</button>
+				</form>
+				
+			</form>
+		{% endif %}
+	</div>
 
 {% endblock %}

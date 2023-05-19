@@ -9,7 +9,15 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'json' %}">Json</a>
         </li>
-        
+        {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+          </li>
+        {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'saludo' %}">Login</a>
+          </li>
+        {% endif %}
       </ul>
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
