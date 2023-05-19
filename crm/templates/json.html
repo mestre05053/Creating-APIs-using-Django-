@@ -2,6 +2,42 @@
 
 {% block content %}
 
-<h1>JSON</h1>
+<div >
+		{%  if user.is_authenticated  %}
+		<h1>RECORDS-JSON</h1>
+			<br>
+			{% if records %}
+				{% for record in records %}
+					{{record.first_name}}
+					{{record.last_name}}
+					{{record.last_name}}
+					{{record.email}}
+					{{record.phone}}
+					{{record.address}}
+					{{record.city}}
+					{{record.state}}
+					{{record.zipcode}}
+					<br>
+				{% endfor %}
+			{% endif %}
+
+
+		{% else %}
+			<h1>Login</h1>
+			<form method="POST" action="{% url 'saludo' %}">
+				{% csrf_token %}
+				<form>
+				  <div class="mb-3">
+				    <input type="text" class="form-control" name="username" placeholder="Username" required>
+				  </div>
+				  <div class="mb-3">
+				    <input type="password" class="form-control" name="password" placeholder="Password" required>
+				  </div>
+				  <button type="submit" class="btn btn-secondary">Login</button>
+				</form>
+				
+			</form>
+		{% endif %}
+	</div>
 
 {% endblock %}

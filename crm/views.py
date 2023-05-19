@@ -2,21 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from . forms import SignUpForm
-
-
-
-class Persona(object):
-
-	"""docstring for Persona"""
-
-	def __init__(self, nombre, apellido):
-		self.nombre=nombre
-		self.apellido = apellido
-
+from .models import Record
 
 def saludo(request):
 	#Check to see if logging in 
-	context = {}
 	if request.method == 'POST':
 		username =request.POST['username']
 		password =request.POST['password']
@@ -33,7 +22,8 @@ def saludo(request):
 		return render(request,'index.html',context)
 
 def json(request):
-	context={}
+	records = Record.objects.all()
+	context = {'records':records}
 
 	return render(request, 'json.html', context)
 
@@ -59,6 +49,5 @@ def register_user(request):
 		form = SignUpForm()
 
 	context={'form':form}
-
 
 	return render(request,'register.html',context)
