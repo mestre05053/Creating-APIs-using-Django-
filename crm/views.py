@@ -5,6 +5,7 @@ from . forms import SignUpForm
 from .models import Record
 
 def saludo(request):
+	context={}
 	#Check to see if logging in 
 	if request.method == 'POST':
 		username =request.POST['username']
