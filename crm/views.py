@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from . forms import SignUpForm
+from . forms import SignUpForm, CreateRecordForm
 from .models import Record
 
 def saludo(request):
@@ -76,3 +76,18 @@ def delete_record(request,pk):
 	else:
 		messages.error(request, 'You Must Be Authenticated To Access Here!...')
 		return redirect('saludo')
+
+def create_record(request):
+	form = CreateRecordForm(request.POST or None)
+	if request.user.is_authenticated:
+		if request.method == "POST":
+			if form.is_valid():
+				add_record = form.save()
+				messages.success(request, "Record Added...")
+				return redirect('json')
+		return render(request, 'create_record.html', {'form':form})
+	else:
+		messages.success(request, "You Must Be Logged In...")
+		return redirect('saludo')
+
+

@@ -1,6 +1,8 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
+from .models import Record
+from django.core.validators import RegexValidator
 
 class SignUpForm(UserCreationForm):
 	email = forms.EmailField(label='',widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Email Address'}))
@@ -29,3 +31,32 @@ class SignUpForm(UserCreationForm):
 		self.fields['password2'].widget.attrs['placeholder'] = 'Confirm Password'
 		self.fields['password2'].label = ''
 		self.fields['password2'].help_text = '<span class="form-text text-muted"><small>Enter the same password as before, for verification.</small></span>'	
+
+
+
+#Form Create Record
+class CreateRecordForm(forms.ModelForm):
+
+	first_name = forms.CharField(required=True, label='', max_length = 100 , widget=forms.TextInput(attrs={'class':'form-control','placeholder':'First Name'}))
+	last_name = forms.CharField(required=True, label='', max_length = 100 , widget=forms.TextInput(attrs={'class':'form-control','placeholder':'First Name'}))
+	email =  forms.EmailField(required=True, label='', max_length = 100 , widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Email'}))	
+	
+	''' Uso forms.RegexField que permite usar expresiones regulares para validar campos'''
+	phone = forms.RegexField(regex=r'^\+?1?\d{9,15}$', label='', max_length = 15 , widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Phone'}))
+	
+	address =  forms.CharField(required=True, label='', max_length = 100 , widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Address'}))
+	city =  forms.CharField(required=True, label='', max_length = 100 , widget=forms.TextInput(attrs={'class':'form-control','placeholder':'City'}))
+	state =  forms.CharField(required=True, label='', max_length = 100 , widget=forms.TextInput(attrs={'class':'form-control','placeholder':'State'}))
+	zipcode =  forms.CharField(required=True, label='', max_length = 20 , widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Zipcode'}))
+
+	class Meta:
+		model = Record
+		fields = ('first_name','last_name','email', 'phone', 'address', 'city', 'state', 'zipcode')
+
+	def __init__(self, *args, **kwargs):
+		super(CreateRecordForm, self).__init__(*args, **kwargs)
+
+		self.fields['phone'].help_text = '<span class="form-text text-muted"><small>Enter a phone number .</small></span>'	
+
+
+
