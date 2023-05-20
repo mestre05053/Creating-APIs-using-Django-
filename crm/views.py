@@ -66,3 +66,13 @@ def costumer_record(request,pk):
 		messages.error(request, 'You Must Be Authenticated To Access Here!...')
 		return redirect('saludo')
 
+def delete_record(request,pk):
+	if request.user.is_authenticated:
+		#Delete the records
+		erase_record = Record.objects.get(id=pk)
+		erase_record.delete()
+		messages.success(request, 'Record deleted Successfully!...')
+		return redirect('json')
+	else:
+		messages.error(request, 'You Must Be Authenticated To Access Here!...')
+		return redirect('saludo')
