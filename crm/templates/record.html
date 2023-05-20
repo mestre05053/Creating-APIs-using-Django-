@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div >
+		{%  if user.is_authenticated  %}
+		<h1>COSTUMER RECORD</h1>					
+			<br>
+			<div class="card">
+			  <div class="card-header">
+			    <h4>{{costumer_record.first_name}}  {{costumer_record.last_name}}</h3>
+			  </div>
+			  <div class="card-body">
+			    <strong> Email: </strong> {{costumer_record.email}}<br>
+			    <strong>Phone: </strong> {{costumer_record.phone}}<br>
+			    <strong>Address: </strong> {{costumer_record.address}}<br>
+			    <strong>City: </strong> {{costumer_record.city}}<br>
+			    <strong>State: </strong> {{costumer_record.state}}<br>
+			    <strong>Zipcode: </strong> {{costumer_record.zipcode}}<br>
+			    <strong>Created at: </strong> {{costumer_record.created_at}}			    
+			  </div>
+			</div>
+			<br>
+	    <a href="{%url 'json'%}" class="btn btn-secondary">Back</a>
+	    <a href="{%url 'json'%}" class="btn btn-danger">Delete</a>
+ 
+		{% else %}
+			<h1>Login</h1>
+			<form method="POST" action="{% url 'saludo' %}">
+				{% csrf_token %}
+				<form>
+				  <div class="mb-3">
+				    <input type="text" class="form-control" name="username" placeholder="Username" required>
+				  </div>
+				  <div class="mb-3">
+				    <input type="password" class="form-control" name="password" placeholder="Password" required>
+				  </div>
+				  <button type="submit" class="btn btn-secondary">Login</button>
+				</form>
+				
+			</form>
+		{% endif %}
+	</div>
+
+{% endblock %}

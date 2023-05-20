@@ -23,10 +23,13 @@ def saludo(request):
 		return render(request,'index.html',context)
 
 def json(request):
-	records = Record.objects.all()
-	context = {'records':records}
-
-	return render(request, 'json.html', context)
+	if request.user.is_authenticated:
+		records = Record.objects.all()
+		context = {'records':records}
+		return render(request, 'json.html', context)
+	else:
+		messages.error(request, 'You Must Be Authenticated To Access Here!...')
+		return redirect('saludo')
 
 def logout_user(request):
 	logout(request)
@@ -52,3 +55,14 @@ def register_user(request):
 	context={'form':form}
 
 	return render(request,'register.html',context)
+
+
+def costumer_record(request,pk):
+	if request.user.is_authenticated:
+		#See the records
+		costumer_record = Record.objects.get(id=pk)
+		return render(request,'record.html',{'costumer_record':costumer_record})
+	else:
+		messages.error(request, 'You Must Be Authenticated To Access Here!...')
+		return redirect('saludo')
+
