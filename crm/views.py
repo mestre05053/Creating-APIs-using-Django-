@@ -4,11 +4,27 @@ from django.contrib import messages
 from . forms import SignUpForm, CreateRecordForm
 from .models import Record
 
+###API imports
+from rest_framework import viewsets
+from rest_framework import permissions
+from .serializers import RecordSerializer
+
+#Json imports
 from django.http import JsonResponse
 import json
-
 from django.core.serializers import serialize
 
+
+
+#Api Serializers Class
+
+class RecordViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Record.objects.all().order_by('created_at')
+    serializer_class = RecordSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
 def saludo(request):
 	context={}
@@ -43,9 +59,7 @@ def data_json(request):
 	return JsonResponse(data, safe=False)
 
 def json_model(request):
-	return render(request, 'json_data.html', {})
-
-
+	return render(request, 'json_data.html', {'data':data})
 	
 	'''
 	data = list(Record.objects.values())

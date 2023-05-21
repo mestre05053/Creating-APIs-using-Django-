@@ -11,6 +11,9 @@
         </li>
         {% if user.is_authenticated %}
           <li class="nav-item">
+            <a class="nav-link" href="http://localhost:8000/api_data" target="_blank">API</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="{% url 'create_record' %}">Create Record</a>
           </li>
           <li class="nav-item">
