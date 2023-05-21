@@ -4,6 +4,12 @@ from django.contrib import messages
 from . forms import SignUpForm, CreateRecordForm
 from .models import Record
 
+from django.http import JsonResponse
+import json
+
+from django.core.serializers import serialize
+
+
 def saludo(request):
 	context={}
 	#Check to see if logging in 
@@ -30,6 +36,31 @@ def json(request):
 	else:
 		messages.error(request, 'You Must Be Authenticated To Access Here!...')
 		return redirect('saludo')
+
+def data_json(request):
+	data = list(Record.objects.values())
+	print(data)
+	return JsonResponse(data, safe=False)
+
+def json_model(request):
+	return render(request, 'json_data.html', {})
+
+
+	
+	'''
+	data = list(Record.objects.values())
+	json_data = list(JsonResponse(data, safe=False))
+	print(json_data)
+	context = {'json_data':json_data}
+	return render(request, 'json_data.html', context)
+	'''
+	'''
+	qs = Record.objects.all()
+	data = serialize("json", qs, fields=('first_name', 'last_name'))
+	context = {'data':data}
+	print(data)
+	return render(request, 'json_data.html', context)
+	'''
 
 def logout_user(request):
 	logout(request)
