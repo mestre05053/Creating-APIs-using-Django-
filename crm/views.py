@@ -91,3 +91,15 @@ def create_record(request):
 		return redirect('saludo')
 
 
+def update_record(request,pk):
+	if request.user.is_authenticated:
+		current_record = Record.objects.get(id=pk)
+		form = CreateRecordForm(request.POST or None, instance = current_record)
+		if form.is_valid():
+			form.save()
+			messages.success(request, "Record Updated Successfully...")
+			return redirect('json')
+		return render(request, 'update_record.html', {'form':form,'current_record':current_record})
+	else:
+		messages.success(request, "You Must Be Logged In...")
+		return redirect('saludo')
