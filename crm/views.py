@@ -18,7 +18,7 @@ from django.core.serializers import serialize
 
 #Api Serializers Class
 
-class RecordViewSet(viewsets.ModelViewSet):
+class RecordViewSet(viewsets.ModelViewSet):     
     """
     API endpoint that allows users to be viewed or edited.
     """
