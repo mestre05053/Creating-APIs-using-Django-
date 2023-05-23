@@ -6,7 +6,6 @@
 	<form method="POST" action="">
 		{% csrf_token %}
 		{%  if user.is_authenticated  %}
-
 			{% if form.errors %}
 						<div class="alert alert-warning alert-dismissible fade show" role="alert">
 						  Your Form Has Errors
@@ -18,7 +17,7 @@
 						  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 						</div>
 			{% endif %}
-		<h1>CREATE RECORD</h1>
+		<h1>UPDATE RECORD</h1>
 			{{form.as_p}}
 		{% endif %}
 	  <button type="submit" class="btn btn-secondary">Update Record</button>

@@ -61,6 +61,13 @@ def logout_user(request):
 	messages.success(request,'You Have Logged Out...')
 	return redirect('saludo')
 
+	'''
+	La funcion REGISTER_USER carga el formulario SignUpForm con la request. POST 
+	valida y salva la forma ,luego carga de la informacion limpia del formulario
+	el usuario y la contrasenna. Luego le pasa estos dos valores a la funcion AUTHENTICATE()
+	y los guarda en la variable USER y le pasa a la funcion LOGIN() la request y la variable USER
+	para luego de registrar al usuario autenticarlo
+	'''
 def register_user(request):
 	if request.method == 'POST':
 		form = SignUpForm(request.POST)
@@ -80,6 +87,10 @@ def register_user(request):
 
 	return render(request,'register.html',context)
 
+'''La funcion COSTUMER_RECORD usa pk como parametro para solicitar el 
+	id del objeto que queremos visualizar en la BD, luego devuelve el
+	objeto
+'''
 def costumer_record(request,pk):
 	if request.user.is_authenticated:
 		#See the records
@@ -99,7 +110,11 @@ def delete_record(request,pk):
 	else:
 		messages.error(request, 'You Must Be Authenticated To Access Here!...')
 		return redirect('saludo')
-
+	''' 
+	La funcion CREATE_RECORD es la que salva registros en la BD. Crea una una instancia 
+	del formulario CREATE_RECORD_FORM valida si el metodo es POST, luego salva la instancia
+	del formulario con FORM.SAVE(). 
+	'''
 def create_record(request):
 	form = CreateRecordForm(request.POST or None)
 	if request.user.is_authenticated:
@@ -112,8 +127,11 @@ def create_record(request):
 	else:
 		messages.success(request, "You Must Be Logged In...")
 		return redirect('saludo')
-
-
+	'''
+	La funcion UPDATE_RECORD usa pk como parametro para solicitar el 
+	id del objeto que queremos modificar en la BD, luego crea una instancia del objeto
+	 CREATE_RECORD_FORM y le pasa el ID luego valida si la forma es valida y la salva
+	'''
 def update_record(request,pk):
 	if request.user.is_authenticated:
 		current_record = Record.objects.get(id=pk)
