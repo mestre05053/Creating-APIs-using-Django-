@@ -53,29 +53,6 @@ def json(request):
 		messages.error(request, 'You Must Be Authenticated To Access Here!...')
 		return redirect('saludo')
 
-def data_json(request):
-	data = list(Record.objects.values())
-	print(data)
-	return JsonResponse(data, safe=False)
-
-def json_model(request):
-	return render(request, 'json_data.html', {'data':data})
-	
-	'''
-	data = list(Record.objects.values())
-	json_data = list(JsonResponse(data, safe=False))
-	print(json_data)
-	context = {'json_data':json_data}
-	return render(request, 'json_data.html', context)
-	'''
-	'''
-	qs = Record.objects.all()
-	data = serialize("json", qs, fields=('first_name', 'last_name'))
-	context = {'data':data}
-	print(data)
-	return render(request, 'json_data.html', context)
-	'''
-
 def logout_user(request):
 	logout(request)
 	messages.success(request,'You Have Logged Out...')
@@ -100,7 +77,6 @@ def register_user(request):
 	context={'form':form}
 
 	return render(request,'register.html',context)
-
 
 def costumer_record(request,pk):
 	if request.user.is_authenticated:

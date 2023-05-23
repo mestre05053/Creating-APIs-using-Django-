@@ -32,8 +32,6 @@ urlpatterns = [
     path('delete_record/<int:pk>', views.delete_record, name='delete_record'),
     path('create_record/', views.create_record, name='create_record'),
     path('update_record/<int:pk>', views.update_record, name='update_record'),
-    path('json_model/', views.json_model, name='json_model'),
-    path('data_json/', views.data_json, name='data_json'),
     path('api_data', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
