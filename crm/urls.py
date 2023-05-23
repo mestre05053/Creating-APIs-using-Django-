@@ -35,3 +35,5 @@ urlpatterns = [
     path('api_data', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
+
+handler404 = "crm.views.page_not_found_view"
