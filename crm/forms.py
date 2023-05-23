@@ -55,7 +55,8 @@ class CreateRecordForm(forms.ModelForm):
 
 	def __init__(self, *args, **kwargs):
 		super(CreateRecordForm, self).__init__(*args, **kwargs)
-
+		
+		# este es el texto de ayuda que sale en el formulario debajo de insertar un numero de telefono
 		self.fields['phone'].help_text = '<span class="form-text text-muted"><small>Enter a phone number .</small></span>'	
 
 

@@ -9,15 +9,12 @@ from rest_framework import viewsets
 from rest_framework import permissions
 from .serializers import RecordSerializer
 
-#Json imports
-from django.http import JsonResponse
-import json
-from django.core.serializers import serialize
 
-
-
-#Api Serializers Class
-
+''' Hay varias maneras de hacer una API se puede hacer utiizando 
+	Clases o Funciones en este caso utlize Clases siguiendo el tutorial
+	de Django-Rest-Framework. 
+	Esta clase carga en un objeto de ViewSet el Modelo de la BD, 
+'''
 class RecordViewSet(viewsets.ModelViewSet):     
     """
     API endpoint that allows users to be viewed or edited.
@@ -26,6 +23,10 @@ class RecordViewSet(viewsets.ModelViewSet):
     serializer_class = RecordSerializer
     permission_classes = [permissions.IsAuthenticated]
 
+
+'''La funcion SALUDO corresponde a la pagina index del sitio
+	chequea siempre si usuario se autentifico sino solicita user y passwd
+'''
 def saludo(request):
 	context={}
 	#Check to see if logging in 
@@ -43,7 +44,9 @@ def saludo(request):
 			return redirect('saludo')
 	else:
 		return render(request,'index.html',context)
+'''La funcion JSON es la que carga de la BD el objeto RECORD 
 
+'''
 def json(request):
 	if request.user.is_authenticated:
 		records = Record.objects.all()
@@ -59,7 +62,6 @@ def logout_user(request):
 	return redirect('saludo')
 
 def register_user(request):
-
 	if request.method == 'POST':
 		form = SignUpForm(request.POST)
 		if form.is_valid():
