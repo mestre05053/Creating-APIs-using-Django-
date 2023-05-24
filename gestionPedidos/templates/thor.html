@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+        <h1>GESTION PEDIDOS</h1>
+                
+                {% for articulos in all_posts_list %}
+                        {{articulos}}
+                {% endfor %}
+        <br>
+                <h1>GESTION THOR</h1>
+                {% if qs %}
+                        {% for articulo in qs %}
+                               <strong>Nombre: </strong> {{articulo.name}}<br>
+                               <strong>Section: </strong>{{articulo.section}}<br>
+                               <strong>Precio: </strong> {{articulo.price}}<br>
+                                <br>
+
+                        {% endfor %}
+                        
+                {% else %}
+                        <p>No hay Articulos</p>
+                {% endif %}
+{% endblock %}

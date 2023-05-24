@@ -3,6 +3,19 @@
 {% block content %}
 
         <h1>GESTION PEDIDOS</h1>
+                
+                {% for articulos in all_posts_list %}
+                        {{articulos}}
+                {% endfor %}
+        <br>
+                <h1>GESTION HOME</h1>
+                {% if articulos %}
+                        {% for articulo in articulos %}
+                                {{articulo.name}}|{{articulo.section}}                                
+                        {% endfor %}
 
-
+                        
+                {% else %}
+                        <p>No hay Articulos</p>
+                {% endif %}
 {% endblock %}

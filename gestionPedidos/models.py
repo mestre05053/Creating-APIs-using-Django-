@@ -12,6 +12,9 @@ class Articulos(models.Model):
 	section=models.CharField(max_length=30)
 	price=models.FloatField()
 
+	def __str__(self):
+		return(f"{self.name}")
+	
 class Pedidos(models.Model):
 	number=models.IntegerField()
 	section=models.CharField(max_length=30)
