@@ -1,6 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView
-from django.views.generic import ListView
+from django.views.generic import TemplateView, ListView
 from .models import Articulos
 from gestionPedidos.models import Articulos
     
@@ -21,6 +20,9 @@ class HomePageView(ListView):
     model = Articulos
     template_name = 'home.html'
     context_object_name = 'articulos'
+
+class AboutPageView(TemplateView):
+    template_name = 'about.html'
     
 
 def thor(request):
