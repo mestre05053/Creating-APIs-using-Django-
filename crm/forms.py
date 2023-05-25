@@ -2,7 +2,6 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
 from .models import Record
-from django.core.validators import RegexValidator
 
 class SignUpForm(UserCreationForm):
 	email = forms.EmailField(label='',widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Email Address'}))
@@ -36,9 +35,26 @@ class SignUpForm(UserCreationForm):
 
 #Form Create Record
 class CreateRecordForm(forms.ModelForm):
+	'''
+	users = User.objects.all()
+	
+	CHOICES = [
+		#(users[0],users[0]),
+		( (users[0] , users[0]) )
+		]
+		
+	#CHOICES = [('alejandro','ALEJANDRO'),('admin','admin')]
 
+	author = forms.ChoiceField(
+		choices=CHOICES, 
+		required=True, 
+		label='', 
+		widget=forms.Select( attrs={'class':'form-select','placeholder':'First Name'})
+		)
+
+	'''
 	first_name = forms.CharField(required=True, label='', max_length = 100 , widget=forms.TextInput(attrs={'class':'form-control','placeholder':'First Name'}))
-	last_name = forms.CharField(required=True, label='', max_length = 100 , widget=forms.TextInput(attrs={'class':'form-control','placeholder':'First Name'}))
+	last_name = forms.CharField(required=True, label='', max_length = 100 , widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Last Name'}))
 	email =  forms.EmailField(required=True, label='', max_length = 100 , widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Email'}))	
 	
 	''' Uso forms.RegexField que permite usar expresiones regulares para validar campos'''
@@ -51,7 +67,8 @@ class CreateRecordForm(forms.ModelForm):
 
 	class Meta:
 		model = Record
-		fields = ('first_name','last_name','email', 'phone', 'address', 'city', 'state', 'zipcode')
+		fields = ('first_name','last_name','email', 'phone', 'address', 'city', 'state', 'zipcode'#,'author'
+	    )
 
 	def __init__(self, *args, **kwargs):
 		super(CreateRecordForm, self).__init__(*args, **kwargs)
