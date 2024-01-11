@@ -2,19 +2,15 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from . forms import SignUpForm, CreateRecordForm
-from .models import Record
+from . models import Record
 
 ###API imports
 from rest_framework import viewsets
 from rest_framework import permissions
-from .serializers import RecordSerializer
+from . serializers import RecordSerializer
 
 #Json imports
-from django.http import JsonResponse
-import json
 from django.core.serializers import serialize
-
-
 
 #Api Serializers Class
 
@@ -22,7 +18,7 @@ class RecordViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
-    queryset = Record.objects.all().order_by('created_at')
+    queryset = Record.objects.all().order_by('-created_at')
     serializer_class = RecordSerializer
     permission_classes = [permissions.IsAuthenticated]
 
@@ -53,29 +49,6 @@ def records(request):
 		messages.error(request, 'You Must Be Authenticated To Access Here!...')
 		return redirect('saludo')
 
-def data_json(request):
-	data = list(Record.objects.values())
-	print(data)
-	return JsonResponse(data, safe=False)
-
-def json_model(request):
-	return render(request, 'json_data.html', {'data':data})
-	
-	'''
-	data = list(Record.objects.values())
-	json_data = list(JsonResponse(data, safe=False))
-	print(json_data)
-	context = {'json_data':json_data}
-	return render(request, 'json_data.html', context)
-	'''
-	'''
-	qs = Record.objects.all()
-	data = serialize("json", qs, fields=('first_name', 'last_name'))
-	context = {'data':data}
-	print(data)
-	return render(request, 'json_data.html', context)
-	'''
-
 def logout_user(request):
 	logout(request)
 	messages.success(request,'You Have Logged Out...')
@@ -101,10 +74,9 @@ def register_user(request):
 
 	return render(request,'register.html',context)
 
-
 def costumer_record(request,pk):
 	if request.user.is_authenticated:
-		#See the records
+		#See the individual records
 		costumer_record = Record.objects.get(id=pk)
 		return render(request,'record.html',{'costumer_record':costumer_record})
 	else:
