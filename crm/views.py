@@ -44,11 +44,11 @@ def saludo(request):
 	else:
 		return render(request,'index.html',context)
 
-def json(request):
+def records(request):
 	if request.user.is_authenticated:
-		records = Record.objects.all()
+		records = Record.objects.all().order_by('-created_at')
 		context = {'records':records}
-		return render(request, 'json.html', context)
+		return render(request, 'records.html', context)
 	else:
 		messages.error(request, 'You Must Be Authenticated To Access Here!...')
 		return redirect('saludo')
@@ -117,7 +117,7 @@ def delete_record(request,pk):
 		erase_record = Record.objects.get(id=pk)
 		erase_record.delete()
 		messages.success(request, 'Record deleted Successfully!...')
-		return redirect('json')
+		return redirect('records')
 	else:
 		messages.error(request, 'You Must Be Authenticated To Access Here!...')
 		return redirect('saludo')
@@ -129,7 +129,7 @@ def create_record(request):
 			if form.is_valid():
 				add_record = form.save()
 				messages.success(request, "Record Added...")
-				return redirect('json')
+				return redirect('records')
 		return render(request, 'create_record.html', {'form':form})
 	else:
 		messages.success(request, "You Must Be Logged In...")
@@ -143,7 +143,7 @@ def update_record(request,pk):
 		if form.is_valid():
 			form.save()
 			messages.success(request, "Record Updated Successfully...")
-			return redirect('json')
+			return redirect('records')
 		return render(request, 'update_record.html', {'form':form,'current_record':current_record})
 	else:
 		messages.success(request, "You Must Be Logged In...")

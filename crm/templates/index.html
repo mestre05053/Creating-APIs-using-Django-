@@ -5,6 +5,9 @@
 	<div class="col-md-6 offset-md-3">
 		{%  if user.is_authenticated  %}
 			<h1>Welcome</h1>
+			<p>
+				Saludos amigos del Diploma Experto en Programación en Python.
+			</p>
 		{% else %}
 			<h1>Login</h1>
 			<form method="POST" action="{% url 'saludo' %}">
@@ -18,8 +21,27 @@
 				  </div>
 				  <button type="submit" class="btn btn-secondary">Login</button>
 				</form>
-				
 			</form>
+			<p></p>
+				<p> 
+				Saludos amigos del Diploma Experto en Programación en Python. Me gustaría que ustedes mis compañeros de estudio le echen un vistazo y me digan que les parece, 
+				que creen que deba mejorar y que debo de agregar, antes de entregar el resultado final.
+				<p>
+					Este es un proyecto que apenas estoy comenzando a desarrollar. Para entrar al sitio es necesario que 
+					se creen su usuario (el email no tiene que ser un real), en esta primera versión el sitio solo cuenta
+					con formulario por medio del cual se pueden crear registros con los datos básicos de una persona. 
+				</p>
+				<p>
+					Cada registro que se inserta se almacena en una base de datos y se publica en una API. 
+					Una vez insertado un registro es posible modificar y eliminar el mismo. 
+					Todo usuario registrado en el sitio tiene todos los permisos (aun no he logrado poner permisos según el tipo de usuario :) )
+				</p> 
+				<p>
+					Me gustaría que ustedes mis compañeros de estudio le echen un vistazo y me digan que les parece, que creen que 
+					debo de mejorar y que debo de agregar. Agradezco su ayudad si pueden hacerle una prueba de errores a esta herramienta, 
+					antes de entregar el resultado final al profesor.
+				</p> 
+				Muchas gracias. </p>
 		{% endif %}
 	</div>
 

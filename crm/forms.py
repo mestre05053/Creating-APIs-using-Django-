@@ -38,7 +38,7 @@ class SignUpForm(UserCreationForm):
 class CreateRecordForm(forms.ModelForm):
 
 	first_name = forms.CharField(required=True, label='', max_length = 100 , widget=forms.TextInput(attrs={'class':'form-control','placeholder':'First Name'}))
-	last_name = forms.CharField(required=True, label='', max_length = 100 , widget=forms.TextInput(attrs={'class':'form-control','placeholder':'First Name'}))
+	last_name = forms.CharField(required=True, label='', max_length = 100 , widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Last Name'}))
 	email =  forms.EmailField(required=True, label='', max_length = 100 , widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Email'}))	
 	
 	''' Uso forms.RegexField que permite usar expresiones regulares para validar campos'''
@@ -55,8 +55,5 @@ class CreateRecordForm(forms.ModelForm):
 
 	def __init__(self, *args, **kwargs):
 		super(CreateRecordForm, self).__init__(*args, **kwargs)
-
-		self.fields['phone'].help_text = '<span class="form-text text-muted"><small>Enter a phone number .</small></span>'	
-
 
 
