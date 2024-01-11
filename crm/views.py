@@ -9,11 +9,7 @@ from rest_framework import viewsets
 from rest_framework import permissions
 from . serializers import RecordSerializer
 
-#Json imports
-from django.core.serializers import serialize
-
 #Api Serializers Class
-
 class RecordViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
@@ -99,7 +95,7 @@ def create_record(request):
 	if request.user.is_authenticated:
 		if request.method == "POST":
 			if form.is_valid():
-				add_record = form.save()
+				form.save()
 				messages.success(request, "Record Added...")
 				return redirect('records')
 		return render(request, 'create_record.html', {'form':form})
